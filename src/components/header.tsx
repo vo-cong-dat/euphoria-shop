@@ -1,18 +1,17 @@
 import logo from "@/assets/images/logo.svg";
 import { routers } from "@/router/routers";
+import { useState } from "react";
 import { Link } from "react-router";
 import { Button } from "./button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import SearchInput from "./search-input";
 import { ArrowDownIcon } from "./icons";
-import { useState } from "react";
+import SearchInput from "./search-input";
 
 const languages = [
   {
@@ -39,7 +38,7 @@ export default function Header() {
   );
 
   return (
-    <div className="border-vapor-blue flex justify-center border bg-white pt-[34px] pb-[31px]">
+    <div className="border-vapor-blue sticky top-0 right-0 left-0 flex justify-center border bg-white pt-[34px] pb-[31px]">
       <div className="flex w-[var(--max-w-screen)] items-center justify-between">
         <div className="flex items-center justify-evenly gap-32">
           <Link to={routers.HOME}>
