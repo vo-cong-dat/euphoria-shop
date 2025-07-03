@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
@@ -21,6 +21,7 @@ const buttonVariants = cva(
       size: {
         default: "px-5 py-4 h-[54px]",
         icon: "h-11 p-3",
+        small: "h-11.5 py-3 px-12",
       },
     },
     defaultVariants: {
@@ -54,7 +55,7 @@ function Button({
       {...props}
     >
       {startIcon}
-      {children}
+      <Slottable>{children}</Slottable>
       {endIcon}
     </Comp>
   );
