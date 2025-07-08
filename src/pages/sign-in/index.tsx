@@ -1,3 +1,4 @@
+import { handleLogin } from "@/api/login";
 import BannerSignIn from "@/assets/images/banners/bannder-5.webp";
 import { Button } from "@/components/button";
 import {
@@ -10,38 +11,37 @@ import {
 } from "@/components/form";
 import { GoogleIcon, XIcon } from "@/components/icons";
 import { Input } from "@/components/input";
+import { KeyLocalStorage } from "@/constants/localstorage";
+import { routers } from "@/router/routers";
+import { schemaLogin, type TLogin } from "@/shemas/login";
 import BannerTemplate from "@/template/banner-template";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { z } from "zod";
-
-const schema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "password must be at least 2 characters.",
-  }),
-});
 
 export default function SignInPage() {
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+  const navigation = useNavigate();
+
+  const form = useForm<TLogin>({
+    resolver: zodResolver(schemaLogin),
     defaultValues: {
       username: "",
       password: "",
     },
   });
-  function onSubmit(data: z.infer<typeof schema>) {
-    toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
+
+  const onSubmit = async (data: TLogin) => {
+    try {
+      const res = await handleLogin(data);
+      localStorage.setItem(KeyLocalStorage.ACCESS_TOKEN, res.data.accessToken);
+      toast("Login Success");
+      navigation(routers.HOME);
+    } catch (error) {
+      const message = error?.message;
+      toast.error(message);
+    }
+  };
 
   return (
     <BannerTemplate banner={BannerSignIn} titlePage="Sign In Page">
