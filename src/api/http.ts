@@ -1,3 +1,4 @@
+import { KeyLocalStorage } from "@/constants/localstorage";
 import axios from "axios";
 
 const httpRequest = axios.create({
@@ -10,7 +11,7 @@ const httpRequest = axios.create({
 
 httpRequest.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(KeyLocalStorage.ACCESS_TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
