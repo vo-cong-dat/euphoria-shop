@@ -52,6 +52,7 @@ export default function Header() {
           <Link to={routers.HOME}>
             <img src={logo} className="h-[45px] w-[92px]" />
           </Link>
+          <Link to={routers.NOT_FOUND}>Not Found</Link>
           <SearchInput />
         </div>
         <div className="flex items-center gap-[60px]">

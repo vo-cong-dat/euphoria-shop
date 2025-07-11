@@ -16,9 +16,11 @@ import { routers } from "@/router/routers";
 import { schemaLogin, type TLogin } from "@/shemas/login";
 import BannerTemplate from "@/template/banner-template";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { UserContext } from "../home/_hooks/use-context-user";
 
 export default function SignInPage() {
   const navigation = useNavigate();
