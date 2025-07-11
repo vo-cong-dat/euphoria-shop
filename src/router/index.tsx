@@ -9,6 +9,7 @@ const HomePage = lazy(() => import("@/pages/home"));
 const SignInPage = lazy(() => import("@/pages/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/sign-up"));
 const NotFoundPage = lazy(() => import("@/pages/not-found"));
+const ProductList = lazy(() => import("@/pages/list-product"));
 
 export const Routers = () => {
   return (
@@ -20,6 +21,7 @@ export const Routers = () => {
         </Route>
         <Route element={<ProtectedLayout />}>
           <Route path={routers.HOME} element={<HomePage />} />
+          <Route path={routers.PRODUCT_LIST} element={<ProductList />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
